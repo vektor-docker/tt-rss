@@ -1,2 +1,0 @@
-vektor-docker/Cr3dOv3r
-vektor-docker/conan-client
