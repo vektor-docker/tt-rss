@@ -1,0 +1,89 @@
+# Пример запуска приложения вместе с БД.
+# Параметры по умолчанию заданы в файле .env
+# Желательно запускать с помощью скрипта run.sh, чтобы корректно подставлялись значения из окружения среды.
+
+version: "3"
+services:
+  postgres:
+    image: javister-docker-docker.bintray.io/javister/javister-docker-postgresql:9.5
+    restart: unless-stopped
+    volumes:
+      - ./tmp/postgres:/config/postgres:rw
+    networks:
+      - appnet
+    expose:
+      - "5432"
+    environment:
+      - LANG=ru_RU.UTF-8
+      - PG_DB_NAME=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - PG_SYNCHRONOUS_COMMIT=off
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - http_proxy=${http_proxy}
+      - no_proxy=${no_proxy}
+
+  tt-rss:
+    image: vektory79-docker-docker.bintray.io/vektory79/tt-rss:1.0
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    volumes:
+      - ./tmp:/config:rw
+    networks:
+      - appnet
+    expose:
+      - "9000"
+    environment:
+      - LANG=ru_RU.UTF-8
+      - DB_HOST=postgres
+      - DB_USER=system
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}
+      - SELF_URL_PATH=${SELF_URL_PATH}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - http_proxy=${http_proxy}
+      - no_proxy=${no_proxy}
+      - RUN_INSTALL=no
+      - VIRTUAL_HOST=localhost
+      - VIRTUAL_PORT=9000
+      - VIRTUAL_PROTO=fastcgi
+#      - LOG_LEVEL=DEBUG
+
+  nginx:
+    image: javister-docker-docker.bintray.io/javister/javister-docker-nginx:2
+    restart: unless-stopped
+    volumes:
+      - ./tmp:/config:rw
+    networks:
+      - appnet
+    ports:
+      - "80:80"
+    environment:
+      - LANG=ru_RU.UTF-8
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - http_proxy=${http_proxy}
+      - no_proxy=${no_proxy}
+
+  docker-gen-nginx:
+    image: javister-docker-docker.bintray.io/javister/javister-docker-docker-gen:0.7.3
+    restart: unless-stopped
+    privileged: true
+    depends_on:
+      - nginx
+    volumes:
+      - ./tmp:/config:rw
+      - /var/run/docker.sock:/tmp/docker.sock
+    networks:
+      - appnet
+    environment:
+      - LANG=ru_RU.UTF-8
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - http_proxy=${http_proxy}
+      - no_proxy=${no_proxy}
+
+networks:
+  appnet:
