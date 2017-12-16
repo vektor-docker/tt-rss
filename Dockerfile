@@ -2,9 +2,7 @@ FROM javister-docker-docker.bintray.io/javister/javister-docker-git:1.0 as GIT
 
 RUN cd /app && \
     chmod 0777 /app && \
-    git-docker clone https://tt-rss.org/git/tt-rss.git tt-rss && \
-    cd tt-rss && \
-    git-docker checkout 17.4
+    git-docker clone https://tt-rss.org/git/tt-rss.git tt-rss
 
 FROM javister-docker-docker.bintray.io/javister/javister-docker-php:72
 MAINTAINER Viktor Verbitsky <vektory79@gmail.com>
