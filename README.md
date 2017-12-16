@@ -1,5 +1,8 @@
 # Docker образ [TT-RSS](https://tt-rss.org/)
 
+[ ![Download](https://api.bintray.com/packages/vektory79/docker/vektory79%3Att-rss/images/download.svg) ](https://bintray.com/vektory79/docker/vektory79%3Att-rss/_latestVersion)
+[![Build Status](https://travis-ci.org/vektor-docker/tt-rss.svg?branch=master)](https://travis-ci.org/vektor-docker/tt-rss)
+
 ## Введение
 Данный образ базируется на образе [javister-docker-php](https://github.com/javister/javister-docker-php)
 и содержит приложение [TT-RSS](https://tt-rss.org/) для аггрегации новостных лент в 
