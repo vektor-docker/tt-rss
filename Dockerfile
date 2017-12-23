@@ -12,7 +12,7 @@ COPY files /
 
 ENV HOME="/app" \
     LOG_LEVEL="INFO" \
-    RPMLIST="php${PHP_VERSION}-php-pecl-apcu php${PHP_VERSION}-php-gd php${PHP_VERSION}-php-json php${PHP_VERSION}-php-pgsql php${PHP_VERSION}-php-mbstring php${PHP_VERSION}-php-xml" \
+    RPMLIST="php${PHP_VERSION}-php-pecl-apcu php${PHP_VERSION}-php-gd php${PHP_VERSION}-php-json php${PHP_VERSION}-php-pgsql php${PHP_VERSION}-php-mbstring php${PHP_VERSION}-php-xml php${PHP_VERSION}-php-process" \
     RUN_INSTALL="yes" \
     DB_TYPE="pgsql" \
     DB_HOST="localhost" \
