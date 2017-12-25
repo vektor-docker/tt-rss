@@ -3,11 +3,11 @@
 
 mkdir -p \
     /config/tt-rss/lock \
-    /config/tt-rss/feed-icons \
     /config/tt-rss/cache/images \
     /config/tt-rss/cache/upload \
     /config/tt-rss/cache/export \
     /config/tt-rss/cache/js
+#    /config/tt-rss/feed-icons \
 chown -R system:system /config/tt-rss /app/tt-rss
 chmod -R 777 /config/tt-rss /app/tt-rss
 
@@ -31,8 +31,8 @@ if [ "${RUN_INSTALL}" == "no" ]; then
     sed --in-place "s/define.'PHP_EXECUTABLE', .*/define('PHP_EXECUTABLE', '\\/opt\\/remi\\/php${PHP_VERSION}\\/root\\/usr\\/bin\\/php');/g" /app/tt-rss/config.php
     sed --in-place "s/define.'LOCK_DIRECTORY', .*/define('LOCK_DIRECTORY', '\\/config\\/tt-rss\\/lock');/g" /app/tt-rss/config.php
     sed --in-place "s/define.'CACHE_DIR', .*/define('CACHE_DIR', '\\/config\\/tt-rss\\/cache');/g" /app/tt-rss/config.php
-    sed --in-place "s/define.'ICONS_DIR', .*/define('ICONS_DIR', '\\/config\\/tt-rss\\/feed-icons');/g" /app/tt-rss/config.php
-    sed --in-place "s/define.'ICONS_URL', .*/define('ICONS_URL', '\\/config\\/tt-rss\\/feed-icons');/g" /app/tt-rss/config.php
+#    sed --in-place "s/define.'ICONS_DIR', .*/define('ICONS_DIR', '\\/config\\/tt-rss\\/feed-icons');/g" /app/tt-rss/config.php
+#    sed --in-place "s/define.'ICONS_URL', .*/define('ICONS_URL', '\\/config\\/tt-rss\\/feed-icons');/g" /app/tt-rss/config.php
     sed --in-place "s/define.'SPHINX_SERVER', .*/define('SPHINX_SERVER', '$(sedescape ${SPHINX_SERVER})');/g" /app/tt-rss/config.php
     sed --in-place "s/define.'SPHINX_INDEX', .*/define('SPHINX_INDEX', '$(sedescape ${SPHINX_INDEX})');/g" /app/tt-rss/config.php
 
