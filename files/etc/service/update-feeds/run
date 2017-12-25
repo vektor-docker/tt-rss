@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ "$LOG_LEVEL" == "DEBUG" ]; then
+    exec setuser system php${PHP_VERSION} /app/tt-rss/update_daemon2.php
+else
+    exec setuser system php${PHP_VERSION} /app/tt-rss/update_daemon2.php > /dev/null 2>&1
+fi
