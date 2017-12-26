@@ -3,7 +3,7 @@
 PROXY_ARGS="--env http_proxy=${http_proxy} \
             --env no_proxy=${no_proxy}"
 
-docker pull dduportal/docker-compose:latest
+docker pull docker/compose:1.18.0
 
 function docker-compose() {
     docker run ${PROXY_ARGS} -v "$(pwd)":"$(pwd)" -v /var/run/docker.sock:/var/run/docker.sock -e COMPOSE_PROJECT_NAME=$(basename "$(pwd)") -ti --rm --workdir="$(pwd)" dduportal/docker-compose:latest $@
