@@ -46,10 +46,13 @@ services:
       - http_proxy=${http_proxy}
       - no_proxy=${no_proxy}
       - RUN_INSTALL=no
-      - VIRTUAL_HOST=localhost
+      - VIRTUAL_HOST=${HOST_NAME}
       - VIRTUAL_PORT=80
       - VIRTUAL_PROTO=http
-#      - LOG_LEVEL=DEBUG
+# For activating Let's Encrypt support for this application
+      #- VIRTUAL_USE_LETSENCRYPT=yes
+# For debug messages
+      #- LOG_LEVEL=DEBUG
 
   nginx:
     image: javister-docker-docker.bintray.io/javister/javister-docker-nginx:2
@@ -60,6 +63,7 @@ services:
       - appnet
     ports:
       - "80:80"
+      - "443:443"
     environment:
       - LANG=ru_RU.UTF-8
       - PUID=${PUID}
@@ -84,6 +88,24 @@ services:
       - PGID=${PGID}
       - http_proxy=${http_proxy}
       - no_proxy=${no_proxy}
+
+## For activating Let's Encrypt support
+#  letsencrypt:
+#    image: javister-docker-docker.bintray.io/javister/javister-docker-letsencrypt:1
+#    restart: unless-stopped
+#    depends_on:
+#      - nginx
+#    volumes:
+#      - ./tmp:/config:rw
+#    networks:
+#      - appnet
+#    environment:
+#      - LANG=ru_RU.UTF-8
+#      - PUID=${PUID}
+#      - PGID=${PGID}
+#      - http_proxy=${http_proxy}
+#      - no_proxy=${no_proxy}
+#      - LETSENCRYPT_EMAIL=vektory79@gmail.com
 
 networks:
   appnet:
