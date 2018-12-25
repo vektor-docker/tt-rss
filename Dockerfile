@@ -1,10 +1,10 @@
-FROM javister-docker-docker.bintray.io/javister/javister-docker-git:1.0 as GIT
+FROM javister-docker-docker.bintray.io/javister/javister-docker-git:1.1 as GIT
 
 RUN cd /app && \
     chmod 0777 /app && \
     git-docker clone https://tt-rss.org/git/tt-rss.git tt-rss
 
-FROM javister-docker-docker.bintray.io/javister/javister-docker-php:72
+FROM javister-docker-docker.bintray.io/javister/javister-docker-php:72-1
 MAINTAINER Viktor Verbitsky <vektory79@gmail.com>
 
 COPY --from=GIT /app /app/

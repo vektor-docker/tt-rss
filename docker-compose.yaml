@@ -5,7 +5,7 @@
 version: "3"
 services:
   postgres:
-    image: javister-docker-docker.bintray.io/javister/javister-docker-postgresql:9.5
+    image: javister-docker-docker.bintray.io/javister/javister-docker-postgresql:11
     restart: unless-stopped
     volumes:
       - ./tmp/postgres:/config/postgres:rw
@@ -24,7 +24,7 @@ services:
       - no_proxy=${no_proxy}
 
   tt-rss:
-    image: vektory79-docker-docker.bintray.io/vektory79/tt-rss:1.0
+    image: vektory79-docker-docker.bintray.io/vektory79/tt-rss:1.1
     restart: unless-stopped
     depends_on:
       - postgres
@@ -55,7 +55,7 @@ services:
       #- LOG_LEVEL=DEBUG
 
   nginx:
-    image: javister-docker-docker.bintray.io/javister/javister-docker-nginx:2
+    image: javister-docker-docker.bintray.io/javister/javister-docker-nginx:2.1
     restart: unless-stopped
     volumes:
       - ./tmp:/config:rw
@@ -72,7 +72,7 @@ services:
       - no_proxy=${no_proxy}
 
   docker-gen-nginx:
-    image: javister-docker-docker.bintray.io/javister/javister-docker-docker-gen:0.7.3
+    image: javister-docker-docker.bintray.io/javister/javister-docker-docker-gen:0.7.4
     restart: unless-stopped
     privileged: true
     depends_on:
@@ -91,7 +91,7 @@ services:
 
 ## For activating Let's Encrypt support
 #  letsencrypt:
-#    image: javister-docker-docker.bintray.io/javister/javister-docker-letsencrypt:1
+#    image: javister-docker-docker.bintray.io/javister/javister-docker-letsencrypt:1.1
 #    restart: unless-stopped
 #    depends_on:
 #      - nginx
